@@ -39,7 +39,17 @@ else:
     print("Error")
 # Question - 5
 # Check whether the quadratic equation has real roots or imaginary roots.
-#  Display the roots 
+b=int(input("input the coeff of x: "))
+a=int(input("input the coeff of x^2: "))
+c=int(input("input the coeff of c: "))
+d=(b*b)-(4*(a*c))
+if(d>0):
+       print("the equation has real roots")
+elif(d==0):
+       print("the equation has two equal roots")
+else:
+       print("the equation has imaginary roots")
+# #  Display the roots 
 
 
 # Question-6
@@ -50,11 +60,11 @@ if (year%400==0) or ((year%4==0)and(year%100!=0)):
 else:
     print(f"{year} not a leap year")
 
-# Question 7
-# 7.Write a program which takes any date as input and display next date of the calendar
-# e.g.
-# I/P: day=20 month=9 year=2005 
-# O/P: day=21 month=9 year 2005
+# # Question 7
+# # 7.Write a program which takes any date as input and display next date of the calendar
+# # e.g.
+# # I/P: day=20 month=9 year=2005 
+# # O/P: day=21 month=9 year 2005
 day = int(input("Enter any Day"))
 month = int(input("Enter any Month"))
 year = int(input("Enter any Year"))
