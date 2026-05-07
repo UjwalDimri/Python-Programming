@@ -1,24 +1,21 @@
-# ============================================================
 #   HOSTEL MANAGEMENT SYSTEM
 #   Modules: Housekeeping & Maintenance
 #   Author : UJWAL DIMRI 590022777
-#   Tech   : Python | OOP | Pandas | NumPy | CSV
-#
+#  
 #   LOGIN ROLES:
-#     1. Student  → Can raise Housekeeping / Maintenance requests
+#     1. Student   Can raise Housekeeping / Maintenance requests
 #                   and rate completed services
-#     2. Warden   → Can view all requests, mark as completed,
+#     2. Warden    Can view all requests, mark as completed,
 #                   and view summary reports
-# ============================================================
+
 
 import pandas as pd
 import numpy as np
 import os
 import getpass   # hides password while typing (shows blank)
 
-# ─────────────────────────────────────────────────────────────
 #  FILE NAMES
-# ─────────────────────────────────────────────────────────────
+
 HOUSEKEEPING_FILE = "housekeeping.csv"
 MAINTENANCE_FILE  = "maintenance.csv"
 USERS_FILE        = "users.csv"          # stores registered students
@@ -29,9 +26,9 @@ CSV_COLUMNS  = ["Name", "Room Number", "Issue", "Preferred Time", "Status", "Rat
 # Columns for users CSV
 USER_COLUMNS = ["Username", "Password", "Role", "Room Number"]
 
-# ─────────────────────────────────────────────────────────────
+
 #  WARDEN CREDENTIALS  (hardcoded — only one warden account)
-# ─────────────────────────────────────────────────────────────
+
 WARDEN_USERNAME = "warden"
 WARDEN_PASSWORD = "warden123"
 
@@ -61,9 +58,9 @@ class AuthManager:
         """Save updated users DataFrame back to CSV."""
         df.to_csv(USERS_FILE, index=False)
 
-    # ----------------------------------------------------------
+    
     #  REGISTER a new student account
-    # ----------------------------------------------------------
+    
     def register_student(self):
         """Lets a new student create a username + password account."""
         print("\n  ── Student Registration ──")
@@ -98,10 +95,10 @@ class AuthManager:
         print(f"  Account created successfully! Welcome, {username}.")
         return True
 
-    # ----------------------------------------------------------
+    
     #  LOGIN as Student
     #  Returns (username, room_number) on success, or (None, None)
-    # ----------------------------------------------------------
+   
     def login_student(self):
         """Verify student credentials from users.csv."""
         print("\n  ── Student Login ──")
@@ -120,10 +117,11 @@ class AuthManager:
         print(f"  Welcome back, {username}!  (Room {room_number})")
         return username, room_number
 
-    # ----------------------------------------------------------
+    
     #  LOGIN as Warden
     #  Returns True on success, False otherwise
-    # ----------------------------------------------------------
+    
+    
     def login_warden(self):
         """Verify warden credentials against the hardcoded account."""
         print("\n  ── Warden / Manager Login ──")
@@ -139,11 +137,11 @@ class AuthManager:
             return False
 
 
-# ==============================================================
+
 #  BASE CLASS: ServiceRequest
 #  Common CRUD logic shared by HouseKeeping and Maintenance.
 #  Demonstrates INHERITANCE — child classes use these methods.
-# ==============================================================
+
 
 class ServiceRequest:
     """
@@ -352,9 +350,9 @@ class ServiceRequest:
         print(f"  Stars            : {stars}")
 
 
-# ==============================================================
+
 #  CHILD CLASS: HouseKeeping   (inherits ServiceRequest)
-# ==============================================================
+
 
 class HouseKeeping(ServiceRequest):
     def __init__(self):
@@ -399,9 +397,9 @@ class HouseKeeping(ServiceRequest):
             else: print("  Invalid option.")
 
 
-# ==============================================================
+
 #  CHILD CLASS: Maintenance   (inherits ServiceRequest)
-# ==============================================================
+
 
 class Maintenance(ServiceRequest):
     def __init__(self):
@@ -446,10 +444,10 @@ class Maintenance(ServiceRequest):
             else: print("  Invalid option.")
 
 
-# ==============================================================
+
 #  CLASS: ReportGenerator  (Warden only)
 #  Combined analysis of both modules using Pandas + NumPy
-# ==============================================================
+
 
 class ReportGenerator:
     """Generates a full hostel services report for the warden."""
@@ -504,10 +502,8 @@ class ReportGenerator:
 
         print("\n" + "="*50)
 
-
-# ==============================================================
 #  PORTAL FUNCTIONS
-# ==============================================================
+
 
 def student_portal(auth: AuthManager, hk: HouseKeeping, mt: Maintenance):
     """
@@ -600,9 +596,7 @@ def warden_portal(auth: AuthManager, hk: HouseKeeping,
             print("  Invalid option.")
 
 
-# ==============================================================
 #  MAIN  →  Program entry point
-# ==============================================================
 
 def main():
     # Instantiate all module objects
